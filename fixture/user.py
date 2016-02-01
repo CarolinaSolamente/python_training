@@ -1,36 +1,18 @@
-# -*- coding: utf-8 -*-
-from selenium.webdriver.firefox.webdriver import WebDriver
-import unittest
-from user import User
-def is_alert_present(wd):
-    try:
-        wd.switch_to_alert().text
-        return True
-    except:
-        return False
 
-class test_add_user(unittest.TestCase):
-    def setUp(self):
-        self.wd = WebDriver()
-        self.wd.implicitly_wait(60)
-    
-    def test_test_add_user(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, username="admin", password="secret")
-        self.open_users_page(wd)
-        self.create_user(wd, User(fname="1", mname="2", lname="3", nname="4", title="5", company="6", address="7", home="8", mobile="9", twork="10", fax="11", email="1.32.@6.ru", email2="12", email3="13", homepage="14",
-                         byear="2000", ayear="2100", address2="15", phone2="16", notes="17"))
-        self.return_to_home_page(wd)
-        self.logout(wd)
+class UserHelper:
 
-    def logout(self, wd):
-        wd.find_element_by_link_text("Logout").click()
+    def __init__(self, app):
+        self.app = app
 
-    def return_to_home_page(self, wd):
+    def return_to_home_page(self):
+        wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
 
-    def create_user(self, wd, user):
+
+    def create(self, user):
+        wd = self.app.wd
+        wd.find_element_by_link_text("add new").click()
+        # init user creation
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(user.fname)
@@ -102,24 +84,3 @@ class test_add_user(unittest.TestCase):
         wd.find_element_by_name("notes").send_keys(user.notes)
         # submit user creation
         wd.find_element_by_name("submit").click()
-
-    def open_users_page(self, wd):
-        wd.find_element_by_link_text("add new").click()
-
-    def login(self, wd, username, password):
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
-        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
-
-    def open_home_page(self, wd):
-        wd.get("http://localhost:8080/addressbook/index.php")
-
-    def tearDown(self):
-        self.wd.quit()
-
-if __name__ == '__main__':
-    unittest.main()

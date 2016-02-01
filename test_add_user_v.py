@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
-from selenium.webdriver.firefox.webdriver import WebDriver
 import unittest
-from user import User
+
+from model.user import User
+from selenium.webdriver.firefox.webdriver import WebDriver
+
+
 def is_alert_present(wd):
     try:
         wd.switch_to_alert().text
