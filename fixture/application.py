@@ -4,6 +4,7 @@ from fixture.group import GroupHelper
 from fixture.user import UserHelper
 
 
+
 class Application:
         def __init__(self):
                 self.wd = WebDriver()
