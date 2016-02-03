@@ -93,6 +93,7 @@ class UserHelper:
             wd = self.app.wd
             wd.find_element_by_name("selected[]").click()
             wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+            # editing user
             wd.find_element_by_name("firstname").click()
             wd.find_element_by_name("firstname").clear()
             wd.find_element_by_name("firstname").send_keys(user.fname)
