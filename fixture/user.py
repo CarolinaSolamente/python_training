@@ -87,15 +87,16 @@ class UserHelper:
 
     def delete_first_user(self):
             wd = self.app.wd
-            wd.find_element_by_link_text("home page").click()
-            wd.find_element_by_name("selected[]").click()
+            if wd.find_element_by_id("37").is_selected():
+                wd.find_element_by_id("37").click()
             wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
-            wd.find_element_by_name("submit").click()
-
+            wd.find_element_by_link_text("home").click()
+            wd.find_element_by_link_text("Logout").click()
 
     def modify_first_user(self):
             wd = self.app.wd
-            wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+            wd.find_element_by_name("selected[]").click()
+            #wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
             wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
             wd.find_element_by_name("firstname").click()
             wd.find_element_by_name("firstname").clear()
@@ -166,4 +167,4 @@ class UserHelper:
             wd.find_element_by_name("notes").clear()
             wd.find_element_by_name("notes").send_keys("17t")
             wd.find_element_by_name("update").click()
-            wd.find_element_by_name("submit").click()
+            self.return_to_home_page()
