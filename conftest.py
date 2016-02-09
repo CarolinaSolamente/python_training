@@ -1,5 +1,5 @@
 import pytest
-from fixture.application import Application
+#from fixture.application import Application
 
 fixture = None
 
@@ -17,10 +17,10 @@ def app(request):
     return fixture
 
 
-@pytest.fixture(scope="session", autouse=True)
-def stop(request):
-    def fin():
-        fixture.session.ensure.logout()
-        fixture.destroy()
-    request.addfinalizer(fin)
-    return fixture
+# @pytest.fixture(scope="session", autouse=True)
+# def stop(request):
+#     def fin():
+#         fixture.session.ensure.logout()
+#         fixture.destroy()
+#     request.addfinalizer(fin)
+#     return fixture
