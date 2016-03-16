@@ -2,21 +2,8 @@
 
 from model.group import Group
 import pytest
-import random
-import string  # содержит константы хранящие списки символов
+from data.add_group import constant as testdata
 
-
-# генератор случайных строк
-def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + string.punctuation + " " * 10  # это символы, которые будем use in random генир-й строке
-    return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
-
-
-# теперь данные существуют сами по себе, вытащили их из функции
-testdata = [Group(name="", header="", footer="")] + [
-    Group(name=random_string("name", 10), header=random_string("header", 20), footer=random_string("footer", 20))
-    for i in range(5)
-]
 
 # тестовые данные будут передовать в качестве параметра (через group)
 # кто их туда будет передовать, кончно тестовый фреймворк
