@@ -11,6 +11,7 @@ from fixture.db import DbFixture
 fixture = None
 target = None
 
+
 def load_config(file):
     global target
     if target is None:
@@ -30,6 +31,7 @@ def app(request):
     fixture.session.ensure_login(username=web_config['username'], password=web_config['password'])
     return fixture
 
+
 @pytest.fixture(scope="session")
 def db(request):
     db_config = load_config(request.config.getoption("--target"))['db']
@@ -39,9 +41,11 @@ def db(request):
     request.addfinalizer(fin)
     return dbfixture
 
+
 @pytest.fixture
 def check_ui(request):
     return request.config.getoption("--check_ui")
+
 
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
@@ -70,6 +74,7 @@ def pytest_generate_tests(metafunc):
 
 def load_from_module(module):
     return importlib.import_module("data.%s" % module).testdata
+
 
 def load_from_json(file):
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "data/%s.json" % file)) as f:
