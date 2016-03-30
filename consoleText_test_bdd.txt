@@ -1,0 +1,49 @@
+Started by user anonymous
+Building in workspace C:\Users\Larisa\.jenkins\jobs\bdd_create\workspace
+ > c:\Program Files\Git\bin\git.exe rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > c:\Program Files\Git\bin\git.exe config remote.origin.url https://github.com/CarolinaSolamente/python_training # timeout=10
+Fetching upstream changes from https://github.com/CarolinaSolamente/python_training
+ > c:\Program Files\Git\bin\git.exe --version # timeout=10
+ > c:\Program Files\Git\bin\git.exe -c core.askpass=true fetch --tags --progress https://github.com/CarolinaSolamente/python_training +refs/heads/*:refs/remotes/origin/*
+ > c:\Program Files\Git\bin\git.exe rev-parse "refs/remotes/origin/master^{commit}" # timeout=10
+ > c:\Program Files\Git\bin\git.exe rev-parse "refs/remotes/origin/origin/master^{commit}" # timeout=10
+Checking out Revision c3402b8da9622d27d55561d4f5f5115d90776ea4 (refs/remotes/origin/master)
+ > c:\Program Files\Git\bin\git.exe config core.sparsecheckout # timeout=10
+ > c:\Program Files\Git\bin\git.exe checkout -f c3402b8da9622d27d55561d4f5f5115d90776ea4
+ > c:\Program Files\Git\bin\git.exe rev-list c3402b8da9622d27d55561d4f5f5115d90776ea4 # timeout=10
+[workspace] $ cmd.exe /c call C:\Users\Larisa\AppData\Local\Temp\shiningpanda6070359198329952328.bat
+
+C:\Users\Larisa\.jenkins\jobs\bdd_create\workspace>pip install -r requirements.txt 
+Collecting pytest (from -r requirements.txt (line 1))
+  Using cached pytest-2.9.1-py2.py3-none-any.whl
+Collecting pytest-bdd (from -r requirements.txt (line 2))
+Collecting selenium (from -r requirements.txt (line 3))
+Collecting jsonpickle (from -r requirements.txt (line 4))
+Collecting pony (from -r requirements.txt (line 5))
+Collecting pymysql (from -r requirements.txt (line 6))
+  Using cached PyMySQL-0.7.2-py2.py3-none-any.whl
+Collecting mysql-connector-python (from -r requirements.txt (line 8))
+  Could not find a version that satisfies the requirement mysql-connector-python (from -r requirements.txt (line 8)) (from versions: )
+No matching distribution found for mysql-connector-python (from -r requirements.txt (line 8))
+You are using pip version 7.1.2, however version 8.1.1 is available.
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.
+
+C:\Users\Larisa\.jenkins\jobs\bdd_create\workspace>py.test --junitxml=report.xml --cucumberjson=report.json bdd\group_scenarios.py 
+============================= test session starts =============================
+platform win32 -- Python 3.4.2, pytest-2.9.1, py-1.4.31, pluggy-0.3.1
+rootdir: C:\Users\Larisa\.jenkins\jobs\bdd_create\workspace\bdd, inifile: 
+plugins: bdd-2.16.1
+collected 2 items
+
+bdd\group_scenarios.py ..
+
+ generated json file: C:\Users\Larisa\.jenkins\jobs\bdd_create\workspace\report.json 
+ generated xml file: C:\Users\Larisa\.jenkins\jobs\bdd_create\workspace\report.xml 
+========================== 2 passed in 9.83 seconds ===========================
+
+C:\Users\Larisa\.jenkins\jobs\bdd_create\workspace>exit 0 
+[Cucumber Tests] Parsing results.
+[Cucumber Tests] parsing report.json
+Recording test results
+Finished: SUCCESS

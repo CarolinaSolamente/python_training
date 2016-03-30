@@ -1,0 +1,83 @@
+Started by user anonymous
+Building in workspace C:\Users\Larisa\.jenkins\jobs\test_groups\workspace
+ > c:\Program Files\Git\bin\git.exe rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > c:\Program Files\Git\bin\git.exe config remote.origin.url https://github.com/CarolinaSolamente/python_training # timeout=10
+Fetching upstream changes from https://github.com/CarolinaSolamente/python_training
+ > c:\Program Files\Git\bin\git.exe --version # timeout=10
+ > c:\Program Files\Git\bin\git.exe -c core.askpass=true fetch --tags --progress https://github.com/CarolinaSolamente/python_training +refs/heads/*:refs/remotes/origin/*
+ > c:\Program Files\Git\bin\git.exe rev-parse "refs/remotes/origin/master^{commit}" # timeout=10
+ > c:\Program Files\Git\bin\git.exe rev-parse "refs/remotes/origin/origin/master^{commit}" # timeout=10
+Checking out Revision d6443b672e41ded8e02288eeecf9aa5ca17a4fa7 (refs/remotes/origin/master)
+ > c:\Program Files\Git\bin\git.exe config core.sparsecheckout # timeout=10
+ > c:\Program Files\Git\bin\git.exe checkout -f d6443b672e41ded8e02288eeecf9aa5ca17a4fa7
+ > c:\Program Files\Git\bin\git.exe rev-list d6443b672e41ded8e02288eeecf9aa5ca17a4fa7 # timeout=10
+[workspace] $ cmd.exe /c call C:\Users\Larisa\AppData\Local\Temp\shiningpanda8558116766126353721.bat
+
+C:\Users\Larisa\.jenkins\jobs\test_groups\workspace>pip install -r requirements.txt 
+Collecting pytest (from -r requirements.txt (line 1))
+  Using cached pytest-2.9.1-py2.py3-none-any.whl
+Collecting pytest-bdd (from -r requirements.txt (line 2))
+Collecting selenium (from -r requirements.txt (line 3))
+Collecting jsonpickle (from -r requirements.txt (line 4))
+Collecting pony (from -r requirements.txt (line 5))
+Collecting pymysql (from -r requirements.txt (line 6))
+  Using cached PyMySQL-0.7.2-py2.py3-none-any.whl
+Collecting mysql-connector-python (from -r requirements.txt (line 8))
+  Could not find a version that satisfies the requirement mysql-connector-python (from -r requirements.txt (line 8)) (from versions: )
+No matching distribution found for mysql-connector-python (from -r requirements.txt (line 8))
+You are using pip version 7.1.2, however version 8.1.1 is available.
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.
+
+C:\Users\Larisa\.jenkins\jobs\test_groups\workspace>py.test --junitxml=report.xml test\test_add_group.py 
+============================= test session starts =============================
+platform win32 -- Python 3.4.2, pytest-2.9.1, py-1.4.31, pluggy-0.3.1
+rootdir: C:\Users\Larisa\.jenkins\jobs\test_groups\workspace\test, inifile: 
+collected 11 items
+
+test\test_add_group.py ....FF.....
+
+ generated xml file: C:\Users\Larisa\.jenkins\jobs\test_groups\workspace\report.xml 
+================================== FAILURES ===================================
+_______ test_add_group[None:namew:headerl @1 2'3s^m:footer<%-#fcQ?yc;7] _______
+
+app = <fixture.application.Application object at 0x03248E10>
+db = <fixture.db.DbFixture object at 0x0329B750>
+json_groups = None:namew:headerl @1 2'3s^m:footer<%-#fcQ?yc;7
+
+    def test_add_group(app, db, json_groups):
+        group = json_groups
+        old_groups = db.get_group_list()
+        app.group.create(group)
+        new_groups = db.get_group_list()
+        old_groups.append(group)
+>       assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+E       assert [50:New group...footerE8, ...] == [50:New group:...footerE8, ...]
+E         Left contains more items, first extra item: None:namew:headerl @1 2'3s^m:footer<%-#fcQ?yc;7
+E         Use -v to get the full diff
+
+test\test_add_group.py:14: AssertionError
+________ test_add_group[None:nameO:header@Cn ":footer)65Yxy;4 \>'v\j] _________
+
+app = <fixture.application.Application object at 0x03248E10>
+db = <fixture.db.DbFixture object at 0x0329B750>
+json_groups = None:nameO:header@Cn ":footer)65Yxy;4 \>'v\j
+
+    def test_add_group(app, db, json_groups):
+        group = json_groups
+        old_groups = db.get_group_list()
+        app.group.create(group)
+        new_groups = db.get_group_list()
+        old_groups.append(group)
+>       assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+E       assert [50:New group...footerE8, ...] == [50:New group:...footerE8, ...]
+E         Left contains more items, first extra item: None:nameO:header@Cn ":footer)65Yxy;4 \>'v\j
+E         Use -v to get the full diff
+
+test\test_add_group.py:14: AssertionError
+===================== 2 failed, 9 passed in 19.44 seconds =====================
+
+C:\Users\Larisa\.jenkins\jobs\test_groups\workspace>exit 1 
+Build step 'Virtualenv Builder' marked build as failure
+Recording test results
+Finished: FAILURE
